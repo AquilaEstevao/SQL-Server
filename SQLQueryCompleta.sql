@@ -93,12 +93,13 @@ FROM person.EmailAddress
 WHERE BusinessEntityID = 26
 
 /*#########-----COUNT------#################################################################################*/
---Contegem de todas as colunas da tabela
+--Contegem de todas as linhas das colunas da tabela
 --SELECT COUNT(*) FROM tabela
 --Contagem especifca de um campo uma coluna
 --SELECT COUNT(coluna) FROM tabela
 --Contagem especifica de um campo uma coluna sem repeticao ou valores nulos
 --SELECT COUNT(DISTINCT coluna) FROM tabela
+
 SELECT COUNT(title)
 FROM person.person
 
@@ -125,7 +126,7 @@ FROM production.product
 SELECT TOP 10 *
 FROM Production.Product
 
---ORDER BY
+/*#########-----ORDER BY------#################################################################################*/
 --Ordernar os resultados por uma coluna em ordem crescente ou decrescente
 --SELECT coluna1, coluna2 FROM tabela ORDER BY coluna1 asc/desc
 --Filtrando em ordem crescente
