@@ -267,19 +267,56 @@ HAVING AVG(LineTotal) <= 100000
 
 /*###################-----[14]-[JOINS]------###########################################################################################################*/
 
-SELECT P.BusinessEntityID, P.FirstName, P.LastName, PE.EmailAddress
-FROM Person.Person AS P
-
-
 /*###################-----[15]-[INNER JOINS]------#####################################################################################################*/
+
+SELECT P.BusinessEntityID, P.FirstName, P.LastName, EA.EmailAddress
+FROM Person.Person AS P
+INNER JOIN Person.EmailAddress AS EA ON P.BusinessEntityID = EA.BusinessEntityID
+
+SELECT P.ListPrice, P.Name, PS.Name
+FROM Production.Product AS P
+INNER JOIN Production.ProductSubcategory AS PS ON P.ProductSubcategoryID = PS.ProductSubcategoryID
+
+SELECT TOP 10 *
+FROM Person.BusinessEntityAddress AS BEA
+INNER JOIN Person.Address A ON A.AddressID = BEA.AddressID
+
+SELECT PP.BusinessEntityID, PP.PhoneNumber, PNT.Name, PNT.PhoneNumberTypeID
+FROM Person.PersonPhone PP
+INNER JOIN Person.PhoneNumberType AS PNT ON PP.PhoneNumberTypeID = PNT.PhoneNumberTypeID
+
+SELECT TOP 10 A.AddressID, A.City, A.StateProvinceID, SP.Name
+FROM Person.Address AS A
+INNER JOIN Person.StateProvince AS SP ON A.StateProvinceID = SP.StateProvinceID
+
+SELECT *
+FROM Person.Person AS P
+INNER JOIN Sales.PersonCreditCard AS PC ON P.BusinessEntityID = PC.BusinessEntityID
 
 /*###################-----[16]-[LEFT OUTER JOINS]------################################################################################################*/
 
+SELECT *
+FROM Person.Person AS P
+LEFT JOIN Sales.PersonCreditCard AS PC ON P.BusinessEntityID = PC.BusinessEntityID
+WHERE PC.BusinessEntityID IS NULL
+
 /*###################-----[17]-[UNION]------###########################################################################################################*/
+
+SELECT FirstName, Title
+FROM Person.Person
+WHERE Title = 'Mr'
+UNION
+SELECT FirstName, Title
+FROM Person.Person
+WHERE MiddleName = 'A'
 
 /*###################-----[18]-[SELF JOIN]------#######################################################################################################*/
 
 /*###################-----[19]-[SUBQUERIES ou SUBSELECT]------#########################################################################################*/
+
+SELECT * 
+FROM Production.Product
+WHERE ListPrice > (SELECT AVG(ListPrice) FROM Production.Product)
 
 /*###################-----[20]-[DATEPART]------########################################################################################################*/
 
